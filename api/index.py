@@ -5,7 +5,7 @@ from functools import wraps
 
 app = Flask(__name__)
 
-app.secret_key = os.environ.get("SECRET_KEY", "change-this-secret-key")
+app.secret_key = os.environ.get("SECRET_KEY", "boda_secret_1512005_!@#_secure")
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 PRICE_PER_1000 = 9
