@@ -4,6 +4,8 @@ import os
 from functools import wraps
 
 app = Flask(__name__)
+application = app
+handler = app
 
 app.secret_key = os.environ.get("SECRET_KEY", "boda_secret_1512005_!@#_secure")
 
