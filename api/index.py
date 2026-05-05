@@ -20,16 +20,16 @@ def order():
     name = data.get("name")
     phone = data.get("phone")
     link = data.get("link")
-    quantity = data.get("quantity")
-    total = int(quantity) * 9
+    quantity = int(data.get("quantity"))
+    total = quantity * 9
 
     conn = get_conn()
     cur = conn.cursor()
 
-    cur.execute(\"\"\"
+    cur.execute("""
         INSERT INTO orders (name, phone, link, quantity, total_price)
         VALUES (%s, %s, %s, %s, %s)
-    \"\"\", (name, phone, link, quantity, total))
+    """, (name, phone, link, quantity, total))
 
     conn.commit()
     cur.close()
@@ -37,13 +37,12 @@ def order():
 
     return jsonify({"status": "success"})
 
-
 @app.route("/admin")
 def admin():
     conn = get_conn()
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM orders ORDER BY id DESC")
+    cur.execute("SELECT id, name, phone, link, quantity, total_price, created_at FROM orders ORDER BY id DESC")
     rows = cur.fetchall()
 
     cur.close()
